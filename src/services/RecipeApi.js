@@ -10,6 +10,6 @@ export async function searchRecipes(term) {
     return json['hits'].map(x => x.recipe);
   } catch (e) {
     console.log("searchRecipes Error: ", e);
-    return [];
+    return false;
   }
 }

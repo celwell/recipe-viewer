@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
+import RecipesListItem from './RecipesListItem';
 
-class RecipesList extends Component {
-  
+const colors = [
+  "#f39c12",
+  "#e67e22",
+];
+
+class RecipesList extends Component {  
   render() {
-    const { recipes, loading } = this.props;
+    const { recipes, loading, error } = this.props;
     
     const listItems = recipes.map(
-      ({ label }, i) =>
-        <li key={i}>{label}</li>
+      (recipe, i) => (
+        <RecipesListItem key={i}
+                         recipe={recipe}
+                         color={colors[i % colors.length]} />
+      )
     );
 
     // todo clean this up
     return (loading ?
             <div className="Loading" /> :
             <ul className="RecipesList">
-            {listItems}
+            {error || listItems}
             </ul>
            );
   }

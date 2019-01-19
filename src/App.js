@@ -30,9 +30,15 @@ class App extends Component {
     searchRecipes(this.state.searchValue).then(
       (recipes) => {
         if (this.state.searchValue === thatSearchValue) {
-          this.setState({
-            recipes: recipes,
-          }, this.hideLoading);
+          if (recipes !== false) {
+            this.setState({
+              recipes: recipes,
+            }, this.hideLoading);
+          } else {
+            this.setState({
+              error: "API rate limit exceeded.",
+            }, this.hideLoading);
+          }
         }
       }
     );
@@ -49,12 +55,12 @@ class App extends Component {
   }
   
   render() {
-    const { searchValue, recipes, loading } = this.state;
+    const { searchValue, recipes, loading, error } = this.state;
     
     return (
       <div className="App">
         <Search term={searchValue} onChange={this.onSearchChange} />
-        <RecipesList recipes={recipes} loading={loading} />
+        <RecipesList recipes={recipes} loading={loading} error={error} />
       </div>
     );
   }

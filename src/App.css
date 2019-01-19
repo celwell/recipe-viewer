@@ -1,39 +1,66 @@
 .App {
-  text-align: center;
+  padding: 20px 50px;
+  width: 750px;
 }
 
 .Search {
+  width: 50%;
   padding: 10px 0 5px 0;
   font-size: 22px;
-  color: #444;
+  color: #2c3e50;
   border: none;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid #445;
+  background: transparent;
 }
 .Search:focus {
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid #2c3e50;
 }
 .Search:focus {
   outline: none;
 }
 
 .RecipesList {
-  
+  padding: 0;
+  list-style: none;
+}
+.RecipesListItem {
+  height: 100px;
+  line-height: 100px;
+  padding-left: 120px;
+  margin-bottom: 5px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-size: 20px;
+  color: #fff;
+}
+.RecipesListItem:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .Loading {
   width: 80px;
   height: 80px;
+  margin-top: 30px;
   border-radius: 40px;
-  border-width: 0 5px 5px 5px;
+  border-width: 0 4px 2px 4px;
   border-color: #444;
-  animation: spin 1s infinite ease;
+  border-style: solid;
+  animation: spin 0.85s infinite linear;
 }
 
 @keyframes spin {
-  from {
+  0% {
     transform: rotate(0deg);
+    border-color: #2c3e50;
   }
-  to {
+  50% {
+    transform: rotate(180deg);
+    border-color: #bbb;
+  }
+  100% {
     transform: rotate(360deg);
+    border-color: #2c3e50;
   }
 }
