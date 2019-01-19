@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Search from './components/Search';
+import RecipesList from './components/Recipes/RecipesList';
+import { searchRecipes } from './services/RecipeApi'
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    searchValue: "",
+    loading: false,
+    recipes: [],
+  }
+
+  showLoading() {
+    this.setState({
+      loading: true,
+    });
+  }
+
+  hideLoading() {
+    this.setState({
+      loading: false,
+    });
+  }
+  
+  refreshRecipes() {
+    this.showLoading();
+    const thatSearchValue = this.state.searchValue;
+    searchRecipes(this.state.searchValue).then(
+      (recipes) => {
+        if (this.state.searchValue === thatSearchValue) {
+          this.setState({
+            recipes: recipes,
+          }, this.hideLoading);
+        }
+      }
+    );
+  }
+
+  onSearchChange = (value) => {
+    this.setState({
+      searchValue: value,
+    }, () => {
+      if (this.state.searchValue.length > 2) {
+        this.refreshRecipes();
+      }
+    });
+  }
+  
   render() {
+    const { searchValue, recipes, loading } = this.state;
+    
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Search term={searchValue} onChange={this.onSearchChange} />
+        <RecipesList recipes={recipes} loading={loading} />
       </div>
     );
   }
