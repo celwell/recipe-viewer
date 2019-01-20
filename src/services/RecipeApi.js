@@ -1,7 +1,7 @@
 // todo: add these as env vars / config
-const baseUrl = "https://api.edamam.com/search?app_id=faf7d25e&app_key= 0bf2536088b142da7ab19a8278d8c374";
+const baseUrl = "https://api.edamam.com/search?app_id=faf7d25e&app_key=0bf2536088b142da7ab19a8278d8c374";
 
-const sanitize = (term) => term.trim();
+const sanitize = term => term.trim();
 
 export async function searchRecipes(term) {
   try {
@@ -12,4 +12,4 @@ export async function searchRecipes(term) {
     console.log("searchRecipes Error: ", e);
     return false;
   }
-}
+};

@@ -46,7 +46,7 @@ class RecipesDetail extends Component {
     this.setState({
       targetServings: e.target.value
     });
-  }
+  };
   
   render() {
     const { recipe } = this.props;

@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
-
   state = {
     searchValue: "",
     loading: false,
@@ -15,15 +14,11 @@ class App extends Component {
   }
 
   showLoading() {
-    this.setState({
-      loading: true,
-    });
+    this.setState({ loading: true });
   }
 
   hideLoading() {
-    this.setState({
-      loading: false,
-    });
+    this.setState({ loading: false });
   }
   
   refreshRecipes() {
@@ -33,9 +28,7 @@ class App extends Component {
       (recipes) => {
         if (this.state.searchValue === thatSearchValue) {
           if (recipes !== false) {
-            this.setState({
-              recipes: recipes,
-            }, this.hideLoading);
+            this.setState({ recipes }, this.hideLoading);
           } else {
             this.setState({
               error: "API rate limit exceeded.",
