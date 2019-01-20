@@ -6,20 +6,33 @@ class RecipesDetail extends Component {
     return ingredientLines.map(
       line => {
         const [quantity, ...text] = line.split(" ");
-        return {quantity: quantity + " --- ",
+        return {quantity: quantity,
                 text: text.join(" ")};
+      }
+    );
+  }
+
+  transformServings(ingredients, ratio) {
+    return ingredients.map(
+      (ingredient) => {
+        return {...ingredient, quantity: (ingredient.quantity * ratio)};
       }
     );
   }
   
   render() {
-    const { label, image, ingredientLines } = this.props.recipe;
+    const { label, image, ingredientLines, yield: servings } = this.props.recipe;
+    // todo make selector
+    const servingsRatio = 2 / servings;
 
     return (
       <div className="RecipesDetail">
         <h2>{label}</h2>
         <Ingredients
-          ingredients={this.parseIngredientLines(ingredientLines)} />
+          ingredients={this.transformServings(
+            this.parseIngredientLines(ingredientLines),
+            servingsRatio
+          )} />
       </div>
     );
   }
