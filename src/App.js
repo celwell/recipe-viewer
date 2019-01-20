@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Search from './components/Search';
 import RecipesList from './components/Recipes/RecipesList';
-import { searchRecipes } from './services/RecipeApi'
+import RecipeDetail from './components/Recipes/RecipeDetail';
+import { searchRecipes } from './services/RecipeApi';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -58,10 +60,18 @@ class App extends Component {
     const { searchValue, recipes, loading, error } = this.state;
     
     return (
-      <div className="App">
-        <Search term={searchValue} onChange={this.onSearchChange} />
-        <RecipesList recipes={recipes} loading={loading} error={error} />
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path="/" render={(props) => (
+            <Fragment>
+              <Search term={searchValue} onChange={this.onSearchChange} />
+              <RecipesList recipes={recipes} loading={loading} error={error} />
+            </Fragment>)} />
+          <Route path="/recipe/:id" render={({ match }) => (
+            <RecipeDetail recipe={recipes[match.params.id]} />
+          )} />
+        </div>
+      </Router>
     );
   }
 }

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Search = ({term, onChange}) => (
-  <input className="Search"
-         type="text"
-         value={term}
-         placeholder="Search..."
-         onChange={(e) => onChange(e.target.value)} />
-);
+class Search extends Component {
+  componentDidMount() {
+    this.input.focus();
+  }
+  
+  render() {
+    const { term, onChange } = this.props;
+    
+    return (
+      <input className="Search"
+             ref={(input) => this.input = input}
+             type="text"
+             value={term}
+             placeholder="Search..."
+             onChange={(e) => onChange(e.target.value)} />    
+    );
+  }
+}
 
 export default Search;

@@ -23,6 +23,9 @@
   padding: 0;
   list-style: none;
 }
+.RecipesList a {
+  text-decoration: none;
+}
 .RecipesListItem {
   height: 100px;
   line-height: 100px;

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class RecipesListItem extends Component {
   render() {
-    const { recipe, color } = this.props;
+    const { id, recipe, color } = this.props;
     const { label, image } = recipe;
 
     return (
-      <li className="RecipesListItem"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundColor: color,
-          }}>
-        {label}
-      </li>
+      <Link to={`/recipe/${id}`}>
+        <li className="RecipesListItem"
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundColor: color,
+            }}>
+          {label}
+        </li>
+      </Link>
     );
   }
 }
