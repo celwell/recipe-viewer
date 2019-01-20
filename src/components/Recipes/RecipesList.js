@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import RecipesListItem from './RecipesListItem';
 
 const colors = [
-  "#f39c12",
-  "#e67e22",
+  
+  "#747d8c",
+  "#57606f",
 ];
 
 class RecipesList extends Component {  
